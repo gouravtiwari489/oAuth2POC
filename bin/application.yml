@@ -1,0 +1,44 @@
+emsurl : http://localhost:8090/ems-api/api/
+
+authToken.skipUrls:
+ generateExchangeRates,qbCustomers,validate-login,updateworkflowexpense
+          
+spring:
+  application:
+    name: report-generator
+  datasource: 
+    url:    jdbc:mysql://192.168.32.111:3306/osi_one_db
+    username: cds
+    password: osicpl123
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties: 
+      hibernate: 
+        dialect: org.hibernate.dialect.MySQL5Dialect
+      
+
+server:
+  context-path: /reports
+  port: 9080   
+  
+security:
+  user:
+    name: admin
+    password: admin
+  basic:
+    enabled: true
+dependencycheck:
+              toggle: false
+              
+logging:
+  path: logs
+  file: logs\report.log
+
+  
+ 
+  
+    
+  
+ 
+ 

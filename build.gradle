@@ -1,0 +1,76 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.9.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+plugins {
+  id 'com.github.sherter.google-java-format' version '0.6'
+}
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'war'
+
+group = 'com.datagenerator'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+apply plugin: "io.spring.dependency-management"
+
+
+repositories {
+	mavenCentral()
+	maven {
+        url 'https://repo.spring.io/libs-snapshot'
+    }
+}
+
+compileJava.dependsOn 'googleJavaFormat'
+
+configurations{
+	providedRuntime
+}
+
+dependencies {
+	compile "net.sourceforge.dynamicreports:dynamicreports-core:+"
+	compile "net.sourceforge.dynamicreports:dynamicreports-adhoc:+"
+	compile "net.sourceforge.dynamicreports:dynamicreports-googlecharts:+"
+	compile "net.sf.barcode4j:barcode4j:+"
+	compile "net.sourceforge.barbecue:barbecue:+"
+	compile "org.apache.xmlgraphics:batik-bridge:+"
+	compile "org.apache.xmlgraphics:xmlgraphics-commons:+"
+	//compile "org.apache.poi:poi:+"
+	compile "xalan:xalan:+"
+	compile "org.apache.velocity:velocity:+"
+	compile "org.springframework:spring-core:+"
+	compile "org.springframework:spring-beans:+"
+	compile "org.json:json:+"
+	compile "mysql:mysql-connector-java:5.1.18"
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter')
+	compile('org.springframework.boot:spring-boot-starter-data-rest')
+	compileOnly('org.projectlombok:lombok')
+	testCompile group: 'com.oracle', name: 'ojdbc6', version: '11.2.0.4.0-atlassian-hosted'
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('io.springfox:springfox-swagger-ui:2.7.0')
+	compile ('io.springfox:springfox-swagger2:2.7.0')
+	compile ('commons-io:commons-io:2.4')
+	
+	compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.9'
+	compile group: 'net.sourceforge.dynamicreports', name: 'dynamicreports-core', version: '4.0.1'
+	compile group: 'com.lowagie', name: 'itext', version: '2.1.7'
+	compile ('org.json:json:20171018')
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+}
+
+war{
+	baseName = "Reports"
+	version = ""
+}
